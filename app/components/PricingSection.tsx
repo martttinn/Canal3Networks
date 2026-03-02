@@ -21,53 +21,30 @@ const PricingSection = () => {
               Elige solo fibra o combina con móvil. Cambia de plan cuando quieras.
             </p>
 
-            <div className="flex w-full max-w-lg mx-auto bg-white/5 p-1 rounded-xl mt-8 border border-white/10 relative">
-              {/* Framer Motion Background for active tab */}
-              <div className="absolute inset-0 p-1 flex pointer-events-none">
-                <AnimatePresence>
-                  {['fiber', 'mobile', 'mobile-only'].map((tab) => {
-                    if (activeTab === tab) {
-                      return (
-                        <motion.div
-                          layoutId="active-tab-bg"
-                          key="active-bg"
-                          className="bg-[#6F70DE] rounded-lg shadow-lg"
-                          style={{
-                            width: '33.33%',
-                            left: tab === 'fiber' ? '0%' : tab === 'mobile' ? '33.33%' : '66.66%',
-                            position: 'absolute',
-                            top: '4px',
-                            bottom: '4px',
-                          }}
-                          initial={false}
-                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                        />
-                      );
-                    }
-                    return null;
-                  })}
-                </AnimatePresence>
-              </div>
-
-              {/* Buttons */}
-              <button
-                onClick={() => setActiveTab('fiber')}
-                className={`relative z-10 px-6 py-2 rounded-lg text-sm font-medium transition-colors w-1/3 text-center whitespace-nowrap ${activeTab === 'fiber' ? 'text-white' : 'text-gray-400 hover:text-white'}`}
-              >
-                Solo Fibra
-              </button>
-              <button
-                onClick={() => setActiveTab('mobile')}
-                className={`relative z-10 px-6 py-2 rounded-lg text-sm font-medium transition-colors w-1/3 text-center whitespace-nowrap ${activeTab === 'mobile' ? 'text-white' : 'text-gray-400 hover:text-white'}`}
-              >
-                Fibra + Móvil
-              </button>
-              <button
-                onClick={() => setActiveTab('mobile-only')}
-                className={`relative z-10 px-6 py-2 rounded-lg text-sm font-medium transition-colors w-1/3 text-center whitespace-nowrap ${activeTab === 'mobile-only' ? 'text-white' : 'text-gray-400 hover:text-white'}`}
-              >
-                Solo Móvil
-              </button>
+            <div className="flex w-full max-w-lg mx-auto bg-white/5 p-1.5 rounded-xl mt-8 border border-white/10 relative">
+              {[
+                { id: 'fiber', label: 'Solo Fibra' },
+                { id: 'mobile', label: 'Fibra + Móvil' },
+                { id: 'mobile-only', label: 'Solo Móvil' }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`relative z-10 px-6 py-2 rounded-lg text-sm font-medium transition-colors w-1/3 text-center whitespace-nowrap ${
+                    activeTab === tab.id ? 'text-white' : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  {activeTab === tab.id && (
+                    <motion.div
+                      layoutId="active-tab-bg"
+                      className="absolute inset-0 bg-[#6F70DE] rounded-lg shadow-md -z-10"
+                      initial={false}
+                      transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  {tab.label}
+                </button>
+              ))}
             </div>
           </div>
         </Reveal>

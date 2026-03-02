@@ -9,6 +9,8 @@ import StatsSection from '@/app/components/StatsSection';
 import FeaturedProductsCarousel from '@/app/components/FeaturedProductsCarousel';
 import WhyUsSection from '@/app/components/WhyUsSection';
 import TestimonialMarquee from '@/app/components/TestimonialMarquee';
+import CoverageMapSection from '@/app/components/CoverageMapSection';
+import FaqSection from '@/app/components/FaqSection';
 import CtaSection from '@/app/components/CtaSection';
 import Footer from '@/app/components/Footer';
 
@@ -40,9 +42,11 @@ const App = () => {
       <InfiniteTicker />
       <PricingSection />
       <StatsSection />
-      <FeaturedProductsCarousel />
       <WhyUsSection />
       <TestimonialMarquee />
+      <FeaturedProductsCarousel />
+      <CoverageMapSection />
+      <FaqSection />
       <CtaSection />
       <Footer />
     </div>

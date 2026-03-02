@@ -57,7 +57,7 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-6 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
-        <div className="lg:col-span-7 flex flex-col gap-6">
+        <div className="lg:col-span-6 flex flex-col gap-6">
           <Reveal delay={200}>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-none brand-font text-white drop-shadow-xl">
               Velocidad y conectividad <br/>
@@ -93,9 +93,9 @@ const HeroSection = () => {
           </Reveal>
         </div>
 
-        <div className="lg:col-span-5 relative h-[500px] flex items-center justify-center">
-          <div className="relative w-full max-w-sm transform transition-all duration-500">
-            <div className="relative bg-[#0d0915]/30 backdrop-blur-md rounded-[2.5rem] border border-white/20 p-8 flex flex-col items-center text-center shadow-2xl overflow-hidden aspect-[4/5] justify-between z-10">
+        <div className="lg:col-span-6 relative min-h-[500px] flex items-center justify-center">
+          <div className="relative w-full max-w-lg transform transition-all duration-500">
+            <div className="relative w-full bg-[#0d0915]/30 backdrop-blur-md rounded-[2.5rem] border border-white/20 p-10 flex flex-col items-center text-center shadow-2xl overflow-hidden min-h-[480px] justify-between z-10">
               <div className={`relative px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase mb-4 border ${heroOffers[currentOfferIndex].color} border-current bg-white/5 backdrop-blur-sm`}>
                 Oferta Destacada
               </div>

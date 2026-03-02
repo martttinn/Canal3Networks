@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo, useEffect } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame, extend } from '@react-three/fiber';
 import { Points, PointMaterial, shaderMaterial } from '@react-three/drei';
 import * as THREE from 'three';
@@ -89,35 +89,6 @@ extend({ DataFlowMaterial });
 const ParticleNetwork = () => {
     const group = useRef<THREE.Group>(null);
     const lineMaterial = useRef<any>(null);
-    const mouse = useRef({ x: 0, y: 0 });
-    const isMobile = useRef(false);
-
-    useEffect(() => {
-        const checkMobile = () => {
-            isMobile.current = window.innerWidth < 768;
-        };
-        
-        // Initial check
-        checkMobile();
-        
-        const handleResize = () => checkMobile();
-        window.addEventListener('resize', handleResize);
-
-        const handleMouseMove = (event: MouseEvent) => {
-            if (isMobile.current) return; // Skip on mobile
-            mouse.current = {
-                x: (event.clientX / window.innerWidth) * 2 - 1,
-                y: -(event.clientY / window.innerHeight) * 2 + 1
-            };
-        };
-        
-        window.addEventListener('mousemove', handleMouseMove);
-        
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
     const { positions, colors, linePositions, lineAttributes } = useMemo(() => {
         const particleCount = 400;
@@ -208,18 +179,8 @@ const ParticleNetwork = () => {
 
     useFrame((state, delta) => {
         if (group.current) {
-            // Constant smooth infinite rotation
-            group.current.rotation.x -= delta / 60;
-            group.current.rotation.y -= delta / 80;
-
-            // Interactive Tilt (Only on Desktop)
-            if (!isMobile.current) {
-                const targetX = mouse.current.x * 0.2;
-                const targetY = mouse.current.y * 0.2;
-                
-                group.current.rotation.x += ((-targetY * 0.5) - 0) * 0.05; 
-                group.current.rotation.y += ((targetX * 0.5) - 0) * 0.05;
-            }
+            group.current.rotation.x -= delta / 35;
+            group.current.rotation.y += delta / 35;
         }
 
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { footerLinkGroups } from '@/app/data/navigation';
+import { Facebook, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -7,9 +8,29 @@ const Footer = () => {
       <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
         <div className="col-span-2 md:col-span-1">
           <h4 className="text-xl font-bold text-white mb-4 brand-font">CANAL3</h4>
-          <p className="text-xs leading-relaxed opacity-60">
+          <p className="text-xs leading-relaxed opacity-60 mb-6">
             Tu operador de confianza. Llevamos internet de alta velocidad donde otros no llegan, con un servicio cercano y transparente.
           </p>
+          <div className="flex items-center gap-4">
+            <a 
+              href="https://es-es.facebook.com/canal3wifi.fibra" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white transition-all duration-300 group"
+              aria-label="Facebook"
+            >
+              <Facebook size={18} className="text-gray-400 group-hover:text-white transition-colors" />
+            </a>
+            <a 
+              href="https://www.instagram.com/canal3networks/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:border-transparent hover:text-white transition-all duration-300 group"
+              aria-label="Instagram"
+            >
+              <Instagram size={18} className="text-gray-400 group-hover:text-white transition-colors" />
+            </a>
+          </div>
         </div>
         {footerLinkGroups.map((group) => (
           <div key={group.title}>
