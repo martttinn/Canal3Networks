@@ -1,8 +1,13 @@
+@import "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap";
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --cursor-size: 500px;
+  --brand-purple: #6f70de;
+  --brand-green: #85edaf;
+  --brand-teal: #78d4ef;
 }
 
 @theme inline {
@@ -22,5 +27,195 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.brand-font {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* ── Keyframes ── */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    scale: 0.95;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    scale: 1;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes textFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes brandFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ── Animation utility classes ── */
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+}
+
+.animate-progress {
+  animation: progress 5s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-text-gradient {
+  background: linear-gradient(to right, #6f70de, #85edaf, #78d4ef, #6f70de);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: textFlow 6s linear infinite;
+}
+
+.hero-gradient-animated {
+  background: linear-gradient(
+    -45deg,
+    #080510,
+    rgba(111, 112, 222, 0.15),
+    #080510,
+    rgba(120, 212, 239, 0.15),
+    #080510,
+    rgba(133, 237, 175, 0.1)
+  );
+  background-size: 300% 300%;
+  animation: brandFlow 20s ease infinite;
+}
+
+.fluid-gradient {
+  background: linear-gradient(-45deg, #0f2e2e, #1a103c, #080510, #0f2e2e);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* ── UI utility classes ── */
+
+.grid-bg {
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  mask-image: radial-gradient(
+    var(--cursor-size) circle at var(--x) var(--y),
+    black 0%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    var(--cursor-size) circle at var(--x) var(--y),
+    black 0%,
+    transparent 100%
+  );
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-card-highlight {
+  background: linear-gradient(
+    145deg,
+    rgba(111, 112, 222, 0.1),
+    rgba(0, 0, 0, 0.2)
+  );
+  border: 1px solid rgba(111, 112, 222, 0.3);
+  box-shadow: 0 0 40px rgba(111, 112, 222, 0.15);
+}
+
+.btn-primary {
+  background-color: var(--brand-green);
+  color: #000;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(133, 237, 175, 0.2);
+}
+.btn-primary:hover {
+  background-color: #5feca0;
+  box-shadow: 0 0 25px rgba(133, 237, 175, 0.4);
+  transform: translateY(-2px);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hover\:pause-animation:hover {
+  animation-play-state: paused;
 }
