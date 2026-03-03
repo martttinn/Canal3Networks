@@ -776,6 +776,7 @@ function MapControls({
 }: MapControlsProps) {
   const { map } = useMap();
   const [waitingForLocation, setWaitingForLocation] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleZoomIn = useCallback(() => {
     map?.zoomTo(map.getZoom() + 1, { duration: 300 });
@@ -798,6 +799,37 @@ function MapControls({
       }
     };
   }, []);
+
+  // Sync fullscreen state with native changes (e.g., user presses ESC)
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+      // Ensure map resizes when returning from native fullscreen
+      setTimeout(() => map?.resize(), 100);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, [map]);
+
+  // Handle ESC key for fake fullscreen
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isFullscreen && !document.fullscreenElement) {
+        setIsFullscreen(false);
+        setTimeout(() => map?.resize(), 100);
+      }
+    };
+
+    if (isFullscreen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isFullscreen, map]);
 
   const handleLocate = useCallback(() => {
     setWaitingForLocation(true);
@@ -839,12 +871,43 @@ function MapControls({
   const handleFullscreen = useCallback(() => {
     const container = map?.getContainer();
     if (!container) return;
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      container.requestFullscreen();
-    }
+    
+    // Toggle active state
+    setIsFullscreen((prev) => {
+      const nextState = !prev;
+      
+      // Attempt native fullscreen if supported
+      if (container.requestFullscreen) {
+        if (nextState) {
+          container.requestFullscreen().catch((err) => {
+            console.warn("Fullscreen API failed, falling back to CSS fullscreen", err);
+            // Native failed (e.g. iPhone), rely on CSS fallback which is active since state is true
+          });
+        } else if (document.fullscreenElement) {
+          document.exitFullscreen();
+        }
+      }
+      
+      // Ensure canvas resizes properly after a slight delay to allow CSS DOM repaints
+      setTimeout(() => map?.resize(), 50);
+      
+      return nextState;
+    });
   }, [map]);
+
+  // Apply fake fullscreen styles dynamically to the map container when native is not used but state is true
+  useEffect(() => {
+    const container = map?.getContainer();
+    if (!container) return;
+
+    if (isFullscreen && !document.fullscreenElement) {
+      // Apply fake fullscreen CSS
+      container.classList.add("!fixed", "!inset-0", "!z-[9999]", "!w-screen", "!h-[100dvh]", "!m-0", "!p-0", "!rounded-none");
+    } else {
+      // Remove fake fullscreen CSS
+      container.classList.remove("!fixed", "!inset-0", "!z-[9999]", "!w-screen", "!h-[100dvh]", "!m-0", "!p-0", "!rounded-none");
+    }
+  }, [isFullscreen, map]);
 
   return (
     <div
@@ -886,8 +949,12 @@ function MapControls({
       )}
       {showFullscreen && (
         <ControlGroup>
-          <ControlButton onClick={handleFullscreen} label="Toggle fullscreen">
-            <Maximize className="size-4" />
+          <ControlButton onClick={handleFullscreen} label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}>
+            {isFullscreen ? (
+              <X className="size-4" />
+            ) : (
+              <Maximize className="size-4" />
+            )}
           </ControlButton>
         </ControlGroup>
       )}

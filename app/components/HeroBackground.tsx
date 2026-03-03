@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useFrame, extend } from '@react-three/fiber';
 import { Points, PointMaterial, shaderMaterial } from '@react-three/drei';
 import * as THREE from 'three';
@@ -88,106 +88,110 @@ extend({ DataFlowMaterial });
 
 const ParticleNetwork = () => {
     const group = useRef<THREE.Group>(null);
-    const lineMaterial = useRef<any>(null);
+    const lineMaterial = useRef<THREE.ShaderMaterial & { uTime?: number }>(null);
 
-    const { positions, colors, linePositions, lineAttributes } = useMemo(() => {
+    const [particlesData] = React.useState(() => {
         const particleCount = 400;
         const maxDistance = 1.8;
         const maxConnections = 3;
         
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
-        
-        const brandColors = [
-            new THREE.Color('#6F70DE'), // Purple
-            new THREE.Color('#85EDAF'), // Green
-            new THREE.Color('#78D4EF')  // Cyan
-        ];
-
-        // 1. Generate Particles
-        for (let i = 0; i < particleCount; i++) {
-            const x = (Math.random() - 0.5) * 12;
-            const y = (Math.random() - 0.5) * 12;
-            const z = (Math.random() - 0.5) * 10;
             
-            positions[i * 3] = x;
-            positions[i * 3 + 1] = y;
-            positions[i * 3 + 2] = z;
+            const brandColors = [
+                new THREE.Color('#6F70DE'), // Purple
+                new THREE.Color('#85EDAF'), // Green
+                new THREE.Color('#78D4EF')  // Cyan
+            ];
 
-            const color = brandColors[Math.floor(Math.random() * brandColors.length)];
-            colors[i * 3] = color.r;
-            colors[i * 3 + 1] = color.g;
-            colors[i * 3 + 2] = color.b;
-        }
+            // 1. Generate Particles
+            for (let i = 0; i < particleCount; i++) {
+                const x = (Math.random() - 0.5) * 12;
+                const y = (Math.random() - 0.5) * 12;
+                const z = (Math.random() - 0.5) * 10;
+                
+                positions[i * 3] = x;
+                positions[i * 3 + 1] = y;
+                positions[i * 3 + 2] = z;
 
-        // 2. Generate Connections
-        const linePoints: number[] = [];
-        const lineProgress: number[] = []; // 0 or 1
-        const lineOffsets: number[] = []; // same for pair
-        const lineSpeeds: number[] = []; // same for pair
-        const lineFlowColors: number[] = []; // RGB for the flow
+                const color = brandColors[Math.floor(Math.random() * brandColors.length)];
+                colors[i * 3] = color.r;
+                colors[i * 3 + 1] = color.g;
+                colors[i * 3 + 2] = color.b;
+            }
 
-        for (let i = 0; i < particleCount; i++) {
-            const x1 = positions[i * 3];
-            const y1 = positions[i * 3 + 1];
-            const z1 = positions[i * 3 + 2];
+            // 2. Generate Connections
+            const linePoints: number[] = [];
+            const lineProgress: number[] = []; // 0 or 1
+            const lineOffsets: number[] = []; // same for pair
+            const lineSpeeds: number[] = []; // same for pair
+            const lineFlowColors: number[] = []; // RGB for the flow
 
-            let connections = 0;
-            for (let j = i + 1; j < particleCount; j++) {
-                const x2 = positions[j * 3];
-                const y2 = positions[j * 3 + 1];
-                const z2 = positions[j * 3 + 2];
+            for (let i = 0; i < particleCount; i++) {
+                const x1 = positions[i * 3];
+                const y1 = positions[i * 3 + 1];
+                const z1 = positions[i * 3 + 2];
 
-                const distSq = (x1-x2)**2 + (y1-y2)**2 + (z1-z2)**2;
+                let connections = 0;
+                for (let j = i + 1; j < particleCount; j++) {
+                    const x2 = positions[j * 3];
+                    const y2 = positions[j * 3 + 1];
+                    const z2 = positions[j * 3 + 2];
 
-                if (distSq < maxDistance * maxDistance) {
-                    linePoints.push(x1, y1, z1);
-                    linePoints.push(x2, y2, z2);
+                    const distSq = (x1-x2)**2 + (y1-y2)**2 + (z1-z2)**2;
 
-                    // Direction 0 -> 1
-                    lineProgress.push(0.0, 1.0);
-                    
-                    const offset = Math.random() * 50.0; // Large offset range for variety
-                    const speed = 0.5 + Math.random() * 0.8; // Varied speeds
-                    
-                    lineOffsets.push(offset, offset);
-                    lineSpeeds.push(speed, speed);
+                    if (distSq < maxDistance * maxDistance) {
+                        linePoints.push(x1, y1, z1);
+                        linePoints.push(x2, y2, z2);
 
-                    // Pick a random brand color for this line's flow
-                    const brandColor = brandColors[Math.floor(Math.random() * brandColors.length)];
-                    lineFlowColors.push(brandColor.r, brandColor.g, brandColor.b);
-                    lineFlowColors.push(brandColor.r, brandColor.g, brandColor.b);
+                        // Direction 0 -> 1
+                        lineProgress.push(0.0, 1.0);
+                        
+                        const offset = Math.random() * 50.0; // Large offset range for variety
+                        const speed = 0.5 + Math.random() * 0.8; // Varied speeds
+                        
+                        lineOffsets.push(offset, offset);
+                        lineSpeeds.push(speed, speed);
 
-                    connections++;
-                    if (connections >= maxConnections) break; 
+                        // Pick a random brand color for this line's flow
+                        const brandColor = brandColors[Math.floor(Math.random() * brandColors.length)];
+                        lineFlowColors.push(brandColor.r, brandColor.g, brandColor.b);
+                        lineFlowColors.push(brandColor.r, brandColor.g, brandColor.b);
+
+                        connections++;
+                        if (connections >= maxConnections) break; 
+                    }
                 }
             }
-        }
 
-        return {
-            positions,
-            colors,
-            linePositions: new Float32Array(linePoints),
-            lineAttributes: {
-                progress: new Float32Array(lineProgress),
-                offset: new Float32Array(lineOffsets),
-                speed: new Float32Array(lineSpeeds),
-                flowColor: new Float32Array(lineFlowColors)
-            }
-        };
-    }, []);
+            return {
+                positions,
+                colors,
+                linePositions: new Float32Array(linePoints),
+                lineAttributes: {
+                    progress: new Float32Array(lineProgress),
+                    offset: new Float32Array(lineOffsets),
+                    speed: new Float32Array(lineSpeeds),
+                    flowColor: new Float32Array(lineFlowColors)
+                }
+            };
+        });
 
+    // Also handle useFrame unconditionally so we obey hook rules
     useFrame((state, delta) => {
         if (group.current) {
             group.current.rotation.x -= delta / 35;
             group.current.rotation.y += delta / 35;
         }
 
-
         if (lineMaterial.current) {
             lineMaterial.current.uTime = state.clock.elapsedTime;
         }
     });
+
+    if (!particlesData) return null;
+
+    const { positions, colors, linePositions, lineAttributes } = particlesData;
 
     return (
         <group ref={group} rotation={[0, 0, Math.PI / 4]}>
@@ -227,7 +231,7 @@ const ParticleNetwork = () => {
                         args={[lineAttributes.flowColor, 3]}
                     />
                 </bufferGeometry>
-                {/* @ts-ignore */}
+                {/* @ts-expect-error DataFlowMaterial custom element */}
                 <dataFlowMaterial
                     ref={lineMaterial}
                     transparent

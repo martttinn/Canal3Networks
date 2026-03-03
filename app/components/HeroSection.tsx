@@ -35,7 +35,7 @@ const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="relative h-[100dvh] lg:h-auto lg:min-h-screen flex flex-col justify-center overflow-hidden"
+      className="relative h-[100svh] lg:h-auto lg:min-h-[100svh] flex flex-col justify-center overflow-hidden"
       style={{ '--x': `${mousePosition.x}px`, '--y': `${mousePosition.y}px` } as React.CSSProperties}
     >
       <div className="absolute inset-0 z-0 bg-[#080510]">

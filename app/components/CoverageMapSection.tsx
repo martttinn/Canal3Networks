@@ -51,7 +51,7 @@ const CoverageLayers = ({ isSatellite }: { isSatellite: boolean }) => {
 
       const addLayerIfMissing = (layer: MapLibreGL.AddLayerObject) => {
         if (!map.getLayer(layer.id)) {
-          map.addLayer(layer as any);
+          map.addLayer(layer as MapLibreGL.AddLayerObject);
         }
       };
 
@@ -278,7 +278,7 @@ const CoverageMapSection = () => {
               <Map
                 ref={mapRef}
                 theme="dark"
-                styles={isSatellite ? { dark: satelliteStyle as any } : undefined}
+                styles={isSatellite ? { dark: satelliteStyle as MapLibreGL.StyleSpecification } : undefined}
                 center={[-1.0299534, 38.0390444]}
                 zoom={11.5}
                 className="w-full h-full"
