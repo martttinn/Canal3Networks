@@ -47,14 +47,14 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="py-24 bg-[#080510] relative border-t border-white/5">
+    <section className="py-16 md:py-24 bg-[#080510] relative border-t border-white/5">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#6F70DE]/5 blur-[120px] rounded-full pointer-events-none" />
       
       <div className="container mx-auto px-6 relative z-10">
         <Reveal>
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 brand-font text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 brand-font text-white">
               Preguntas <span className="text-[#6F70DE]">Frecuentes</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">

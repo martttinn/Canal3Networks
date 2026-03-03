@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Router } from 'lucide-react';
+import { Router, ChevronDown } from 'lucide-react';
 import Reveal from '@/app/components/Reveal';
 import HeroBackground from '@/app/components/HeroBackground';
 import { heroOffers } from '@/app/data/hero-offers';
@@ -35,7 +35,7 @@ const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex flex-col justify-center pt-20 overflow-hidden"
+      className="relative h-[100dvh] lg:h-auto lg:min-h-screen flex flex-col justify-center overflow-hidden"
       style={{ '--x': `${mousePosition.x}px`, '--y': `${mousePosition.y}px` } as React.CSSProperties}
     >
       <div className="absolute inset-0 z-0 bg-[#080510]">
@@ -55,36 +55,36 @@ const HeroSection = () => {
         <div className="absolute inset-0 grid-bg opacity-20 z-10 pointer-events-none mix-blend-overlay"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <div className="container mx-auto px-6 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center h-full lg:h-auto pt-20 lg:pt-0">
 
-        <div className="lg:col-span-6 flex flex-col gap-6">
+        <div className="lg:col-span-6 flex flex-col gap-6 text-center lg:text-left items-center lg:items-start justify-center h-full lg:h-auto">
           <Reveal delay={200}>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-none brand-font text-white drop-shadow-xl">
-              Velocidad y conectividad <br/>
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight leading-none brand-font text-white drop-shadow-xl">
+              Velocidad y conectividad <br className="hidden sm:block" />
               <span className="animate-text-gradient">al mejor precio.</span>
             </h1>
           </Reveal>
 
           <Reveal delay={400}>
-            <p className="text-lg md:text-xl text-gray-200 max-w-lg leading-relaxed drop-shadow-md">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-lg leading-relaxed drop-shadow-md">
               Disfruta ya de la <strong className="text-white font-bold">máxima velocidad y cobertura</strong> al mejor precio. Con <strong className="text-white font-bold">asistencia técnica y atención al cliente</strong> personalizadas.
             </p>
           </Reveal>
 
-          <Reveal delay={600}>
-            <div className="max-w-md">
-              <div className="relative group">
+          <Reveal delay={600} className="w-full flex justify-center lg:justify-start">
+            <div className="w-[90vw] sm:w-[90%] max-w-md mt-8 lg:mt-0">
+              <div className="relative group w-full">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6F70DE] to-[#85EDAF] rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                <div className="relative flex items-center bg-[#0d0915]/90 backdrop-blur-md rounded-xl p-1.5 border border-white/10">
-                  <div className="pl-4 pr-2 text-gray-400">
+                <div className="relative flex flex-col sm:flex-row items-center bg-[#0d0915]/90 backdrop-blur-md rounded-xl p-1.5 border border-white/10 gap-2 sm:gap-0">
+                  <div className="hidden sm:block pl-4 pr-2 text-gray-400">
                     <Router size={20} />
                   </div>
                   <input
                     type="text"
                     placeholder="Tu Código Postal"
-                    className="bg-transparent w-full p-2 outline-none text-white placeholder-gray-400 text-lg font-medium"
+                    className="bg-transparent w-full p-3 sm:p-2 outline-none text-white placeholder-gray-400 text-lg font-medium text-center sm:text-left"
                   />
-                  <button className="bg-white text-black hover:bg-[#85EDAF] hover:text-black transition-all px-6 py-3 rounded-lg font-bold text-sm tracking-wide flex items-center gap-2 whitespace-nowrap shadow-lg">
+                  <button className="w-full sm:w-auto bg-white text-black hover:bg-[#85EDAF] hover:text-black transition-all px-6 py-3 rounded-lg font-bold text-sm tracking-wide flex justify-center items-center gap-2 whitespace-nowrap shadow-lg">
                     Ver Cobertura
                   </button>
                 </div>
@@ -93,9 +93,9 @@ const HeroSection = () => {
           </Reveal>
         </div>
 
-        <div className="lg:col-span-6 relative min-h-[500px] flex items-center justify-center">
-          <div className="relative w-full max-w-lg transform transition-all duration-500">
-            <div className="relative w-full bg-[#0d0915]/30 backdrop-blur-md rounded-[2.5rem] border border-white/20 p-10 flex flex-col items-center text-center shadow-2xl overflow-hidden min-h-[480px] justify-between z-10">
+        <div className="hidden lg:flex lg:col-span-6 relative min-h-[400px] lg:min-h-[500px] items-center justify-center pb-10 lg:pb-0">
+          <div className="relative w-full max-w-lg transform transition-all duration-500 px-4 sm:px-0">
+            <div className="relative w-full bg-[#0d0915]/30 backdrop-blur-md rounded-[2rem] sm:rounded-[2.5rem] border border-white/20 p-6 sm:p-10 flex flex-col items-center text-center shadow-2xl overflow-hidden min-h-[420px] sm:min-h-[480px] justify-between z-10">
               <div className={`relative px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase mb-4 border ${heroOffers[currentOfferIndex].color} border-current bg-white/5 backdrop-blur-sm`}>
                 Oferta Destacada
               </div>
@@ -142,6 +142,13 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 lg:hidden flex flex-col items-center animate-bounce cursor-pointer group" onClick={() => window.scrollBy({ top: window.innerHeight * 0.9, behavior: 'smooth' })}>
+        <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-400 mb-2 group-hover:text-white transition-colors">Descubre más</span>
+        <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md group-hover:bg-white/10 transition-all shadow-[0_0_15px_rgba(111,112,222,0.3)]">
+          <ChevronDown className="text-white w-5 h-5 opacity-80 group-hover:opacity-100" />
         </div>
       </div>
     </section>

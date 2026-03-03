@@ -45,22 +45,15 @@ const FeaturedProductsCarousel = () => {
 
   return (
     <section className="py-24 bg-[#080510] relative overflow-hidden border-t border-white/5">
-      <div className="container mx-auto px-6 mb-12">
+      <div className="container mx-auto px-6 mb-8 md:mb-12">
         <Reveal>
-          <div className="flex flex-col md:flex-row justify-between items-end gap-6">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2 brand-font text-white">
-                Productos destacados
-              </h2>
-              <p className="text-gray-400">
-                Compra y recoge tus productos en nuestra tienda fisica!
-              </p>
-            </div>
-            <div className="flex gap-2">
-              <button className="p-2 rounded-full border border-white/10 hover:bg-white/10 text-white transition-colors">
-                <ArrowLeftRight size={20} />
-              </button>
-            </div>
+          <div className="text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold mb-2 brand-font text-white mx-auto md:mx-0">
+              Productos destacados
+            </h2>
+            <p className="text-gray-400 mx-auto md:mx-0 max-w-sm md:max-w-none">
+              Compra y recoge tus productos en nuestra tienda fisica!
+            </p>
           </div>
         </Reveal>
       </div>

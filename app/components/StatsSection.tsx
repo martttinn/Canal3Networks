@@ -37,15 +37,15 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="py-20 bg-[#080510] relative">
+    <section className="py-16 md:py-20 bg-[#080510] relative">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 relative">
           <div className="hidden md:block absolute left-1/3 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
           <div className="hidden md:block absolute left-2/3 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
           {stats.map((stat, index) => (
             <Reveal key={index} delay={index * 100}>
               <div className="flex flex-col items-center text-center group">
-                <div className={`text-6xl md:text-7xl font-bold mb-2 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b ${stat.gradientClass} brand-font`}>
+                <div className={`text-5xl sm:text-6xl md:text-7xl font-bold mb-2 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b ${stat.gradientClass} brand-font`}>
                   <CountUp
                     end={stat.end}
                     prefix={stat.prefix}

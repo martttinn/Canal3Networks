@@ -188,11 +188,11 @@ const CoverageMapSection = () => {
   };
 
   return (
-    <section className="py-24 bg-[#080510] relative border-t border-white/5">
+    <section className="py-16 md:py-24 bg-[#080510] relative border-t border-white/5">
       <div className="container mx-auto px-6">
         <Reveal>
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 brand-font text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 brand-font text-white">
               Nuestra <span className="text-[#6F70DE]">Cobertura</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -274,7 +274,7 @@ const CoverageMapSection = () => {
 
           {/* Map */}
           <Reveal className="lg:col-span-8" delay={200}>
-            <div className="rounded-3xl overflow-hidden border border-white/10 h-[500px] lg:h-[600px] relative group/map">
+            <div className="rounded-3xl overflow-hidden border border-white/10 h-[400px] sm:h-[500px] lg:h-[600px] relative group/map">
               <Map
                 ref={mapRef}
                 theme="dark"
@@ -289,6 +289,7 @@ const CoverageMapSection = () => {
                   position="bottom-right"
                   showZoom
                   showLocate
+                  showFullscreen
                   onLocate={(coords) => setUserLocation(coords)}
                 />
 

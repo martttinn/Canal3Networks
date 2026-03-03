@@ -7,10 +7,10 @@ import { reviews } from '@/app/data/reviews';
 
 const TestimonialMarquee = () => {
   return (
-    <section className="py-24 bg-[#080510] border-t border-white/5 relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-[#080510] border-t border-white/5 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10 mb-12 text-center">
         <Reveal>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 brand-font text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 brand-font text-white">
             Clientes <span className="text-[#85EDAF]">Felices</span>
           </h2>
           <p className="text-gray-400">La satisfacción de nuestros usuarios es nuestra mejor publicidad.</p>

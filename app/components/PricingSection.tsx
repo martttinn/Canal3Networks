@@ -21,7 +21,7 @@ const PricingSection = () => {
               Elige solo fibra o combina con móvil. Cambia de plan cuando quieras.
             </p>
 
-            <div className="flex w-full max-w-lg mx-auto bg-white/5 p-1.5 rounded-xl mt-8 border border-white/10 relative">
+            <div className="flex w-full max-w-lg mx-auto bg-white/5 p-1 sm:p-1.5 rounded-lg sm:rounded-xl mt-8 border border-white/10 relative overflow-x-auto no-scrollbar">
               {[
                 { id: 'fiber', label: 'Solo Fibra' },
                 { id: 'mobile', label: 'Fibra + Móvil' },
@@ -30,7 +30,7 @@ const PricingSection = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative z-10 px-6 py-2 rounded-lg text-sm font-medium transition-colors w-1/3 text-center whitespace-nowrap ${
+                  className={`relative z-10 px-3 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors min-w-[100px] flex-1 text-center whitespace-nowrap ${
                     activeTab === tab.id ? 'text-white' : 'text-gray-400 hover:text-white'
                   }`}
                 >
@@ -57,7 +57,7 @@ const PricingSection = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full"
             >
               {currentPlans.map((plan) => (
                 <div

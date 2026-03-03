@@ -42,9 +42,9 @@ const App = () => {
       <InfiniteTicker />
       <PricingSection />
       <StatsSection />
+      <FeaturedProductsCarousel />
       <WhyUsSection />
       <TestimonialMarquee />
-      <FeaturedProductsCarousel />
       <CoverageMapSection />
       <FaqSection />
       <CtaSection />
