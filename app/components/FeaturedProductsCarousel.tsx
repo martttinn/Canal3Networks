@@ -48,13 +48,10 @@ const FeaturedProductsCarousel = () => {
     <section className="py-24 bg-[#080510] relative overflow-hidden border-t border-white/5">
       <div className="container mx-auto px-6 mb-8 md:mb-12">
         <Reveal>
-          <div className="text-center md:text-left">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 brand-font text-white tracking-tight mx-auto md:mx-0">
-              Productos destacados
+          <div className="text-center">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 brand-font text-white tracking-tight mx-auto">
+              Productos <span className="text-[#6F70DE]">destacados</span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto md:mx-0">
-              Compra y recoge tus productos en nuestra tienda fisica!
-            </p>
           </div>
         </Reveal>
       </div>

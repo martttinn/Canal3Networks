@@ -71,11 +71,8 @@ const CoverageMapSection = () => {
         <Reveal>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 brand-font text-white tracking-tight">
-              Nuestra <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6F70DE] to-[#78D4EF]">Cobertura</span>
+              Nuestra <span className="text-[#6F70DE]">Cobertura</span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Fibra óptica propia en expansión continua. Consulta si llegamos a tu zona.
-            </p>
           </div>
         </Reveal>
 

@@ -55,11 +55,8 @@ const FaqSection = () => {
         <Reveal>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 brand-font text-white tracking-tight">
-              Preguntas <span className="text-[#6F70DE]">Frecuentes</span>
+              Preguntas <span className="text-[#78D4EF]">Frecuentes</span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Todo lo que necesitas saber antes de dar el salto a la nueva generación de Internet.
-            </p>
           </div>
         </Reveal>
 

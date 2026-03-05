@@ -32,7 +32,7 @@ export const devices: Device[] = [
     subtitle: "Galaxy AI is here",
     price: "29€/mes",
     tag: "NOVEDAD",
-    image: "https://images.unsplash.com/photo-1610945265064-f45a70262b6f?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1610945415309-9fb4bf6c2578?q=80&w=800&auto=format&fit=crop",
     color: "text-[#85EDAF]",
     accentColor: "#85EDAF",
     border: "hover:border-[#85EDAF]/50",
