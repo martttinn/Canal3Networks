@@ -55,7 +55,7 @@ const Footer = () => {
         ))}
       </div>
       <div className="container mx-auto px-6 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs opacity-50 gap-4 text-center md:text-left">
-        <span>© 2024 Canal3 Networks. Todos los derechos reservados.</span>
+        <span>© 2026 Canal3 Networks. Todos los derechos reservados.</span>
       </div>
     </footer>
   );

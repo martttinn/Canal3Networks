@@ -16,8 +16,8 @@ const PricingSection = () => {
       <div className="container mx-auto px-6">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 brand-font">Tarifas Simples</h2>
-            <p className="text-gray-400 text-lg">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 brand-font text-white tracking-tight">Tarifas Simples</h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Elige solo fibra o combina con móvil. Cambia de plan cuando quieras.
             </p>
 

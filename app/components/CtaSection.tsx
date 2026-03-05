@@ -16,10 +16,10 @@ const CtaSection = () => {
       <div className="container mx-auto px-6 relative z-10 text-center">
         <Reveal>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 brand-font text-white drop-shadow-xl">
-            ¿Dudas? Hablemos.
+            ¿A que esperas?
           </h2>
           <p className="text-gray-300 mb-8 sm:mb-10 max-w-xl mx-auto text-base sm:text-lg drop-shadow-md">
-            Sin contestadores automáticos. Escríbenos por WhatsApp y un agente te recomendará la mejor tarifa para tu casa.
+            Sin contestadores automáticos. Escríbenos por WhatsApp y un técnico te recomendará la mejor tarifa para tu casa.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

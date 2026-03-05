@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef, useEffect } from 'react';
-import { ArrowLeftRight, ArrowRight, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import Reveal from '@/app/components/Reveal';
 import { devices } from '@/app/data/devices';
 
@@ -48,10 +49,10 @@ const FeaturedProductsCarousel = () => {
       <div className="container mx-auto px-6 mb-8 md:mb-12">
         <Reveal>
           <div className="text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2 brand-font text-white mx-auto md:mx-0">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 brand-font text-white tracking-tight mx-auto md:mx-0">
               Productos destacados
             </h2>
-            <p className="text-gray-400 mx-auto md:mx-0 max-w-sm md:max-w-none">
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto md:mx-0">
               Compra y recoge tus productos en nuestra tienda fisica!
             </p>
           </div>
@@ -84,10 +85,12 @@ const FeaturedProductsCarousel = () => {
                     </span>
                   </div>
 
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
 
                   {/* Gradient overlay for text readability with mask fix */}
