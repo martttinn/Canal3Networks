@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Reveal from '@/app/components/Reveal';
 import { faqData } from '@/app/data/faq';
@@ -11,7 +10,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }: { question: string, answ
     <div className="border border-white/10 rounded-2xl bg-[#121217] overflow-hidden transition-colors hover:border-white/20">
       <button
         type="button"
-        className="flex items-center justify-between w-full p-6 text-left"
+        className="flex items-center justify-between w-full p-6 text-left cursor-pointer"
         onClick={onClick}
         aria-expanded={isOpen}
       >
@@ -20,27 +19,22 @@ const FaqItem = ({ question, answer, isOpen, onClick }: { question: string, answ
           <ChevronDown size={16} className={isOpen ? 'text-[#6F70DE]' : 'text-gray-400'} />
         </span>
       </button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <div className="p-6 pt-0 text-gray-400 leading-relaxed">
-              {answer}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div
+        className="grid transition-all duration-300 ease-in-out"
+        style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
+      >
+        <div className="overflow-hidden">
+          <div className="p-6 pt-0 text-gray-400 leading-relaxed">
+            {answer}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 const FaqSection = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0); // Primera abierta por defecto
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleItem = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);

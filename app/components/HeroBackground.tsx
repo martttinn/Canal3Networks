@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, extend } from '@react-three/fiber';
 import { Points, PointMaterial, shaderMaterial } from '@react-three/drei';
 import * as THREE from 'three';
@@ -86,12 +86,13 @@ const DataFlowMaterial = shaderMaterial(
 
 extend({ DataFlowMaterial });
 
-const ParticleNetwork = () => {
+const ParticleNetwork = ({ isVisible }: { isVisible: boolean }) => {
     const group = useRef<THREE.Group>(null);
     const lineMaterial = useRef<THREE.ShaderMaterial & { uTime?: number }>(null);
 
     const [particlesData] = React.useState(() => {
-        const particleCount = 400;
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        const particleCount = isMobile ? 200 : 400;
         const maxDistance = 1.8;
         const maxConnections = 3;
         
@@ -177,8 +178,8 @@ const ParticleNetwork = () => {
             };
         });
 
-    // Also handle useFrame unconditionally so we obey hook rules
     useFrame((state, delta) => {
+        if (!isVisible) return;
         if (group.current) {
             group.current.rotation.x -= delta / 35;
             group.current.rotation.y += delta / 35;
@@ -245,10 +246,23 @@ const ParticleNetwork = () => {
 };
 
 const HeroBackground = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => setIsVisible(entry.isIntersecting),
+            { threshold: 0 }
+        );
+        observer.observe(containerRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="absolute inset-0 z-0 bg-[#080510]">
-             <Canvas camera={{ position: [0, 0, 4] }} gl={{ antialias: true, alpha: true }}>
-                <ParticleNetwork />
+        <div ref={containerRef} className="absolute inset-0 z-0 bg-[#080510]">
+             <Canvas camera={{ position: [0, 0, 4] }} gl={{ antialias: true, alpha: true }} frameloop={isVisible ? 'always' : 'never'}>
+                <ParticleNetwork isVisible={isVisible} />
              </Canvas>
              
              {/* Gradient Overlays */}

@@ -1,37 +1,43 @@
 export interface Device {
   id: number;
   name: string;
-  subtitle: string;
+  brand: string;
   price: string;
-  tag: string;
+  category: string;
+  isNew?: boolean;
   image: string;
   color: string;
   accentColor: string;
   border: string;
   bgIcon?: string;
   features: string[];
+  oldPrice?: string;
+  discount?: string;
 }
 
 export const devices: Device[] = [
   {
     id: 1,
     name: "iPhone 15 Pro",
-    subtitle: "Titanium. A17 Pro.",
-    price: "35€/mes",
-    tag: "PREMIUM",
+    brand: "Apple",
+    price: "999€",
+    category: "Smartphone",
     image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop",
     color: "text-[#6F70DE]",
     accentColor: "#6F70DE",
     border: "hover:border-[#6F70DE]/50",
     bgIcon: "bg-[#6F70DE]/20",
-    features: ["256GB", "Titanio Natural", "Sin entrada"],
+    features: ["256GB", "Titanio Natural", "Últimas unidades"],
+    oldPrice: "1219€",
+    discount: "-18%",
   },
   {
     id: 2,
     name: "Samsung Galaxy S24",
-    subtitle: "Galaxy AI is here",
-    price: "29€/mes",
-    tag: "NOVEDAD",
+    brand: "Samsung",
+    price: "899€",
+    category: "Smartphone",
+    isNew: true,
     image: "https://images.unsplash.com/photo-1610945415309-9fb4bf6c2578?q=80&w=800&auto=format&fit=crop",
     color: "text-[#85EDAF]",
     accentColor: "#85EDAF",
@@ -41,21 +47,23 @@ export const devices: Device[] = [
   {
     id: 3,
     name: "Xiaomi 13T Pro",
-    subtitle: "Leica Camera",
-    price: "15€/mes",
-    tag: "SIN INTERESES",
+    brand: "Xiaomi",
+    price: "499€",
+    category: "Smartphone",
     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop",
     color: "text-[#78D4EF]",
     accentColor: "#78D4EF",
     border: "hover:border-[#78D4EF]/50",
     features: ["Carga 120W", "Pantalla 144Hz", "Fundas incluidas"],
+    oldPrice: "699€",
+    discount: "-28%",
   },
   {
     id: 4,
     name: "Sony WH-1000XM5",
-    subtitle: "Noise Cancelling",
+    brand: "Sony",
     price: "299€",
-    tag: "ACCESORIO",
+    category: "Accesorio",
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop",
     color: "text-white",
     accentColor: "#FFFFFF",
@@ -65,9 +73,9 @@ export const devices: Device[] = [
   {
     id: 5,
     name: "Apple Watch S9",
-    subtitle: "Más inteligente.",
-    price: "12€/mes",
-    tag: "WEARABLE",
+    brand: "Apple",
+    price: "449€",
+    category: "Wearable",
     image: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?q=80&w=800&auto=format&fit=crop",
     color: "text-[#6F70DE]",
     accentColor: "#6F70DE",

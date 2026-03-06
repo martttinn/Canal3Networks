@@ -1,9 +1,10 @@
 "use client";
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { MessageCircle } from 'lucide-react';
 import Reveal from '@/app/components/Reveal';
-import HorizontalFlowStreaks from '@/app/components/HorizontalFlowStreaks';
+const HorizontalFlowStreaks = dynamic(() => import('@/app/components/HorizontalFlowStreaks'), { ssr: false });
 
 const CtaSection = () => {
   return (
@@ -23,10 +24,10 @@ const CtaSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-black font-bold py-4 px-8 rounded-xl hover:bg-gray-200 transition-colors shadow-lg">
+            <button className="bg-white text-black font-bold py-4 px-8 rounded-xl hover:bg-gray-200 transition-colors shadow-lg cursor-pointer">
               Ver todas las ofertas
             </button>
-            <button className="bg-[#25D366] text-white font-bold py-4 px-8 rounded-xl hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2 shadow-lg shadow-green-900/20">
+            <button className="bg-[#25D366] text-white font-bold py-4 px-8 rounded-xl hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2 shadow-lg shadow-green-900/20 cursor-pointer">
               <MessageCircle size={20} /> Chat por WhatsApp
             </button>
           </div>

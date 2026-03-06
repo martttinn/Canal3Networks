@@ -22,6 +22,7 @@ const HorizontalFlowStreaks = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     let animationFrameId: number;
+    let isVisible = true;
 
     const resizeCanvas = () => {
       const parent = canvas.parentElement;
@@ -104,12 +105,22 @@ const HorizontalFlowStreaks = () => {
           }
         }
       }
+      if (!isVisible) return;
       animationFrameId = window.requestAnimationFrame(draw);
     };
+
+    // IntersectionObserver: pause when off-screen
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisible = entry.isIntersecting; if (isVisible) draw(); },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
     draw();
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       window.cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
     };
   }, []);
 

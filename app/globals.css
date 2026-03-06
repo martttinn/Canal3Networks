@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap";
+/* Fonts are self-hosted via next/font/google in layout.tsx */
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -88,14 +88,14 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body), "Inter", sans-serif;
 }
 
 h1,
 h2,
 h3,
 .brand-font {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-brand), "Space Grotesk", sans-serif;
 }
 
 /* ── Keyframes ── */
@@ -178,11 +178,13 @@ h3,
 
 .animate-scroll {
   animation: scroll 20s linear infinite;
+  animation-play-state: paused;
 }
 
 @media (min-width: 768px) {
   .animate-scroll {
     animation: scroll 40s linear infinite;
+    animation-play-state: running;
   }
 }
 

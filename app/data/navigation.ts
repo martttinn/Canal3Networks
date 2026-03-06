@@ -1,4 +1,4 @@
-export const navLinks = ["Fibra", "Móvil", "Empresas", "Ayuda"] as const;
+export const navLinks = ["Servicios", "Productos", "Promociones", "Empresas", "Sobre Nosotros"] as const;
 
 export const tickerItems = [
   "FIBRA ÓPTICA PROPIA", "•",

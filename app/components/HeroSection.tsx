@@ -7,7 +7,6 @@ import HeroBackground from '@/app/components/HeroBackground';
 import { heroOffers } from '@/app/data/hero-offers';
 
 const HeroSection = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
@@ -22,10 +21,8 @@ const HeroSection = () => {
     const handleMouseMove = (e: MouseEvent) => {
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
+        heroRef.current.style.setProperty('--x', `${e.clientX - rect.left}px`);
+        heroRef.current.style.setProperty('--y', `${e.clientY - rect.top}px`);
       }
     };
     window.addEventListener('mousemove', handleMouseMove);
@@ -36,19 +33,9 @@ const HeroSection = () => {
     <section
       ref={heroRef}
       className="relative h-[100svh] lg:h-auto lg:min-h-[100svh] flex flex-col justify-center overflow-hidden"
-      style={{ '--x': `${mousePosition.x}px`, '--y': `${mousePosition.y}px` } as React.CSSProperties}
     >
       <div className="absolute inset-0 z-0 bg-[#080510]">
         <HeroBackground />
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover opacity-30 mix-blend-screen pointer-events-none"
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-green-and-blue-liquid-flow-12053-large.mp4" type="video/mp4" />
-        </video>
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#080510] to-transparent z-10"></div>
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#080510] to-transparent z-10"></div>
         <div className="absolute inset-0 bg-[#080510]/10 z-10"></div>
@@ -61,7 +48,7 @@ const HeroSection = () => {
           <Reveal delay={200}>
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight leading-none brand-font text-white drop-shadow-xl">
               Velocidad y conectividad <br className="hidden sm:block" />
-              <span className="animate-text-gradient">al mejor precio.</span>
+              <span className="animate-text-gradient">al mejor precio</span>
             </h1>
           </Reveal>
 
@@ -84,7 +71,7 @@ const HeroSection = () => {
                     placeholder="Tu Código Postal"
                     className="bg-transparent w-full p-3 sm:p-2 outline-none text-white placeholder-gray-400 text-lg font-medium text-center sm:text-left"
                   />
-                  <button className="w-full sm:w-auto bg-white text-black hover:bg-[#85EDAF] hover:text-black transition-all px-6 py-3 rounded-lg font-bold text-sm tracking-wide flex justify-center items-center gap-2 whitespace-nowrap shadow-lg">
+                  <button className="w-full sm:w-auto bg-white text-black hover:bg-[#85EDAF] hover:text-black transition-all px-6 py-3 rounded-lg font-bold text-sm tracking-wide flex justify-center items-center gap-2 whitespace-nowrap shadow-lg cursor-pointer">
                     Ver Cobertura
                   </button>
                 </div>
@@ -122,7 +109,7 @@ const HeroSection = () => {
               </div>
 
               <div className="w-full mt-6 relative z-20">
-                <button className={`w-full py-4 rounded-2xl font-bold text-sm uppercase tracking-wide transition-all shadow-lg text-white ${heroOffers[currentOfferIndex].accent} hover:opacity-90 active:scale-95 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]`}>
+                <button className={`w-full py-4 rounded-2xl font-bold text-sm uppercase tracking-wide transition-all shadow-lg text-white cursor-pointer ${heroOffers[currentOfferIndex].accent} hover:opacity-90 active:scale-95 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]`}>
                   Ver Detalles
                 </button>
 
@@ -131,7 +118,7 @@ const HeroSection = () => {
                     <button
                       key={idx}
                       onClick={() => setCurrentOfferIndex(idx)}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                      className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                         currentOfferIndex === idx
                         ? `w-8 ${heroOffers[currentOfferIndex].accent}`
                         : 'w-2 bg-white/10 hover:bg-white/20'

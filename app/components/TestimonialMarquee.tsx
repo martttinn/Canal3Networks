@@ -67,7 +67,7 @@ const TestimonialMarquee = () => {
         <div 
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="flex md:animate-scroll hover:pause-animation w-full md:w-max gap-4 md:gap-6 px-4 md:px-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar"
+          className="flex animate-scroll hover:pause-animation w-full md:w-max gap-4 md:gap-6 px-4 md:px-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar"
         >
           {[...reviews, ...reviews, ...reviews].map((review, i) => (
             <div

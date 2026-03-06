@@ -1,7 +1,5 @@
-"use client";
-
-import React, { useState, useEffect, useRef } from 'react';
-import Navbar from '@/app/components/Navbar';
+import React from 'react';
+import PageShell from '@/app/components/PageShell';
 import HeroSection from '@/app/components/HeroSection';
 import InfiniteTicker from '@/app/components/InfiniteTicker';
 import PricingSection from '@/app/components/PricingSection';
@@ -14,30 +12,9 @@ import FaqSection from '@/app/components/FaqSection';
 import CtaSection from '@/app/components/CtaSection';
 import Footer from '@/app/components/Footer';
 
-const App = () => {
-  const [showNav, setShowNav] = useState(true);
-  const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY;
-        if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-          setShowNav(false);
-        } else {
-          setShowNav(true);
-        }
-        lastScrollY.current = currentScrollY;
-      }
-    };
-
-    window.addEventListener('scroll', controlNavbar);
-    return () => window.removeEventListener('scroll', controlNavbar);
-  }, []);
-
+export default function Page() {
   return (
-    <div className="min-h-screen bg-[#080510] text-white font-sans selection:bg-[#6F70DE] selection:text-white overflow-x-hidden">
-      <Navbar showNav={showNav} />
+    <PageShell>
       <HeroSection />
       <InfiniteTicker />
       <PricingSection />
@@ -49,8 +26,6 @@ const App = () => {
       <FaqSection />
       <CtaSection />
       <Footer />
-    </div>
+    </PageShell>
   );
-};
-
-export default App;
+}

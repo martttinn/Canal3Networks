@@ -11,7 +11,7 @@ export interface Store {
 export const stores: Store[] = [
   {
     id: 1,
-    name: "Canal3 Networks",
+    name: "Canal3 Networks El Raal",
     address: "C/ Mayor 204, El Raal – Murcia",
     phone: "+34 744 483 448",
     hours: "L-S 10:00–14:00 / 17:00–21:00",

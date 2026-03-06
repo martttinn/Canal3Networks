@@ -66,7 +66,7 @@ const FeaturedProductsCarousel = () => {
           <div key={product.id} className="snap-center shrink-0">
             <Reveal delay={i * 100}>
               <div
-                className={`relative w-[320px] h-[500px] bg-[#121217] rounded-[2rem] overflow-hidden border border-white/5 flex flex-col transition-all duration-300 group ${product.border} hover:shadow-2xl hover:shadow-black/50 hover:-translate-y-2`}
+                className={`relative w-[320px] h-[500px] bg-[#121217] rounded-[2rem] overflow-hidden border border-white/5 flex flex-col transition-all duration-300 group hover:border-white/30 hover:shadow-2xl hover:shadow-black/50 hover:-translate-y-2`}
                 style={{
                   '--accent': product.accentColor,
                 } as React.CSSProperties}
@@ -77,9 +77,19 @@ const FeaturedProductsCarousel = () => {
                 {/* Image Section - Full Bleed */}
                 <div className="relative h-[55%] w-full overflow-hidden z-10">
                   <div className="absolute top-4 left-4 z-20">
-                    <span className="text-[10px] font-black px-3 py-1 rounded-md bg-white text-black uppercase tracking-widest shadow-md">
-                      {product.tag}
-                    </span>
+                    {product.discount ? (
+                      <span className="text-[10px] font-black px-3 py-1 rounded-md bg-rose-600 text-white shadow-lg shadow-rose-600/20 uppercase tracking-widest">
+                        OFERTA {product.discount}
+                      </span>
+                    ) : product.isNew ? (
+                      <span className="text-[10px] font-black px-3 py-1 rounded-md bg-white text-black uppercase tracking-widest shadow-md">
+                        Novedad
+                      </span>
+                    ) : (
+                      <span className="text-[10px] font-black px-3 py-1 rounded-md bg-white text-black uppercase tracking-widest shadow-md">
+                        {product.category}
+                      </span>
+                    )}
                   </div>
 
                   <Image
@@ -100,7 +110,7 @@ const FeaturedProductsCarousel = () => {
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <h3 className="text-xl font-bold text-white leading-tight">{product.name}</h3>
-                        <p className="text-gray-400 text-xs font-medium uppercase tracking-wide mt-1">{product.subtitle}</p>
+                        <p className="text-gray-400 text-xs font-medium uppercase tracking-wide mt-1">{product.brand}</p>
                       </div>
                     </div>
 
@@ -117,11 +127,20 @@ const FeaturedProductsCarousel = () => {
                   {/* Price & Action */}
                   <div className="flex items-end justify-between mt-4">
                     <div>
-                      <p className="text-[10px] text-gray-500 mb-0.5 font-bold uppercase tracking-wider">Precio exclusivo</p>
-                      <div className="text-2xl font-bold text-white tracking-tight" style={{ color: product.accentColor }}>{product.price}</div>
+                      <p className="text-[10px] text-gray-500 mb-0.5 font-bold uppercase tracking-wider">Precio</p>
+                      <div className="flex items-center gap-2">
+                        <div className={`text-2xl font-bold tracking-tight ${product.discount ? 'text-rose-500' : 'text-white'}`}>
+                          {product.price}
+                        </div>
+                        {product.oldPrice && (
+                          <div className="text-sm font-medium text-gray-500 line-through">
+                            {product.oldPrice}
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <button
-                      className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white transition-all duration-300 group-hover:bg-white group-hover:text-black group-hover:border-white"
+                      className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white transition-all duration-300 group-hover:bg-white group-hover:text-black group-hover:border-white cursor-pointer"
                     >
                       <ChevronRight size={20} />
                     </button>
@@ -152,7 +171,7 @@ const FeaturedProductsCarousel = () => {
 
       {/* Catalog Button */}
       <div className="mt-12 flex justify-center">
-        <button className="px-8 py-4 rounded-xl border border-white/10 hover:border-[#6F70DE]/50 hover:bg-[#6F70DE]/10 transition-all duration-300 text-white font-medium flex items-center gap-3 group">
+        <button className="px-8 py-4 rounded-xl border border-white/10 hover:border-[#6F70DE]/50 hover:bg-[#6F70DE]/10 transition-all duration-300 text-white font-medium flex items-center gap-3 group cursor-pointer">
           Ver catálogo completo
           <ArrowRight size={18} className="text-[#6F70DE] group-hover:translate-x-1 transition-transform" />
         </button>
