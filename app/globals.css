@@ -179,6 +179,7 @@ h3,
 .animate-scroll {
   animation: scroll 20s linear infinite;
   animation-play-state: paused;
+  will-change: transform;
 }
 
 @media (min-width: 768px) {

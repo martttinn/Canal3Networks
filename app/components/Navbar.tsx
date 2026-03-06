@@ -21,8 +21,9 @@ const Navbar = ({ showNav }: NavbarProps) => {
             <Image 
               src="/logo/canal3_logo_simple_trans.png" 
               alt="Canal3 Logo" 
-              width={260} 
-              height={80} 
+              width={160} 
+              height={50} 
+              sizes="(max-width: 768px) 112px, 160px"
               className="h-14 md:h-20 w-auto object-contain"
               priority
             />
