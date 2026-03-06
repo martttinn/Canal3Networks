@@ -45,10 +45,6 @@ const TestimonialMarquee = () => {
 
   return (
     <section className="py-16 md:py-24 bg-[#080510] border-t border-white/5 relative overflow-hidden">
-      <style>{`
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
       <div className="container mx-auto px-6 relative z-10 mb-16 text-center">
         <Reveal>
           <h2 className="text-4xl md:text-6xl font-bold mb-6 brand-font text-white tracking-tight">

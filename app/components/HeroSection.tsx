@@ -29,15 +29,19 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
+    let rafId = 0;
     const handleMouseMove = (e: MouseEvent) => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        heroRef.current.style.setProperty('--x', `${e.clientX - rect.left}px`);
-        heroRef.current.style.setProperty('--y', `${e.clientY - rect.top}px`);
-      }
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        if (heroRef.current) {
+          const rect = heroRef.current.getBoundingClientRect();
+          heroRef.current.style.setProperty('--x', `${e.clientX - rect.left}px`);
+          heroRef.current.style.setProperty('--y', `${e.clientY - rect.top}px`);
+        }
+      });
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => { window.removeEventListener('mousemove', handleMouseMove); cancelAnimationFrame(rafId); };
   }, []);
 
   return (
@@ -56,18 +60,14 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center h-full lg:h-auto pt-20 lg:pt-0">
 
         <div className="lg:col-span-6 flex flex-col gap-6 text-center lg:text-left items-center lg:items-start justify-center h-full lg:h-auto">
-          <Reveal delay={200}>
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight leading-none brand-font text-white drop-shadow-xl">
-              Velocidad y conectividad <br className="hidden sm:block" />
-              <span className="animate-text-gradient">al mejor precio</span>
-            </h1>
-          </Reveal>
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight leading-none brand-font text-white drop-shadow-xl animate-fade-in">
+            Velocidad y conectividad <br className="hidden sm:block" />
+            <span className="animate-text-gradient">al mejor precio</span>
+          </h1>
 
-          <Reveal delay={400}>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-lg leading-relaxed drop-shadow-md">
-              Disfruta ya de la <strong className="text-white font-bold">máxima velocidad y cobertura</strong> al mejor precio. Con <strong className="text-white font-bold">asistencia técnica y atención al cliente</strong> personalizadas.
-            </p>
-          </Reveal>
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-lg leading-relaxed drop-shadow-md animate-fade-in" style={{ animationDelay: '150ms', animationFillMode: 'both' }}>
+            Disfruta ya de la <strong className="text-white font-bold">máxima velocidad y cobertura</strong> al mejor precio. Con <strong className="text-white font-bold">asistencia técnica y atención al cliente</strong> personalizadas.
+          </p>
 
           <Reveal delay={600} className="w-full flex justify-center lg:justify-start">
             <div className="w-[90vw] sm:w-[90%] max-w-md mt-8 lg:mt-0">
