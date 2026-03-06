@@ -38,7 +38,7 @@ export const devices: Device[] = [
     price: "899€",
     category: "Smartphone",
     isNew: true,
-    image: "https://images.unsplash.com/photo-1610945415309-9fb4bf6c2578?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=800&auto=format&fit=crop",
     color: "text-[#85EDAF]",
     accentColor: "#85EDAF",
     border: "hover:border-[#85EDAF]/50",

@@ -1,10 +1,21 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { Router, ChevronDown } from 'lucide-react';
 import Reveal from '@/app/components/Reveal';
-import HeroBackground from '@/app/components/HeroBackground';
 import { heroOffers } from '@/app/data/hero-offers';
+
+const HeroBackground = dynamic(() => import('@/app/components/HeroBackground'), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 bg-[#080510]">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(111,112,222,0.08)_0%,_transparent_70%)]" />
+      <div className="absolute top-1/4 left-1/3 w-[400px] h-[400px] bg-[#6F70DE]/5 blur-[120px] rounded-full" />
+      <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-[#78D4EF]/5 blur-[100px] rounded-full" />
+    </div>
+  ),
+});
 
 const HeroSection = () => {
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
