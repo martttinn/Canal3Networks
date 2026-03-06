@@ -96,7 +96,7 @@ const FeaturedProductsCarousel = () => {
                     src={product.image}
                     alt={product.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, 320px"
+                    sizes="320px"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
 
