@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Reveal from '@/app/components/Reveal';
 import { faqData } from '@/app/data/faq';
 
@@ -15,20 +16,30 @@ const FaqItem = ({ question, answer, isOpen, onClick }: { question: string, answ
         aria-expanded={isOpen}
       >
         <h3 className="text-lg font-medium text-white pr-8">{question}</h3>
-        <span className={`flex items-center justify-center w-8 h-8 rounded-full bg-white/5 border border-white/10 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-[#6F70DE]/20 border-[#6F70DE]/40' : ''}`}>
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className={`flex items-center justify-center w-8 h-8 rounded-full shrink-0 border ${isOpen ? 'bg-[#6F70DE]/20 border-[#6F70DE]/40' : 'bg-white/5 border-white/10'}`}
+        >
           <ChevronDown size={16} className={isOpen ? 'text-[#6F70DE]' : 'text-gray-400'} />
-        </span>
+        </motion.span>
       </button>
-      <div
-        className="grid transition-all duration-300 ease-in-out"
-        style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
-      >
-        <div className="overflow-hidden">
-          <div className="p-6 pt-0 text-gray-400 leading-relaxed">
-            {answer}
-          </div>
-        </div>
-      </div>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="p-6 pt-0 text-gray-400 leading-relaxed">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -41,7 +52,10 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-[#080510] relative border-t border-white/5">
+    <section className="py-16 md:py-24 relative">
+      {/* Background glow effects */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#6F70DE] rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#85EDAF] rounded-full mix-blend-screen filter blur-[150px] opacity-5 pointer-events-none"></div>
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#6F70DE]/5 blur-[120px] rounded-full pointer-events-none" />
       

@@ -6,6 +6,8 @@ export interface Store {
   hours: string;
   lng: number;
   lat: number;
+  mapsUrl?: string;
+  directionsUrl?: string;
 }
 
 export const stores: Store[] = [
@@ -15,8 +17,10 @@ export const stores: Store[] = [
     address: "C/ Mayor 204, El Raal – Murcia",
     phone: "+34 744 483 448",
     hours: "L-S 10:00–14:00 / 17:00–21:00",
-    lng: -1.0299534,
-    lat: 38.0390444,
+    lng: -1.0272030703768313,
+    lat: 38.04177092268139,
+    mapsUrl: "https://maps.app.goo.gl/dsEeedyTd38PeTuo8",
+    directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Canal3+Networks,+C.+Mayor,+204,+30139+El+Raal,+Murcia",
   },
 ];
 
@@ -46,6 +50,27 @@ export const coverageZones: GeoJSON.FeatureCollection = {
             [-1.011507603190978, 38.04079561133304],
             [-1.0065175919561398, 38.04946833600761],
             [-1.0144024797389477, 38.057843347126976],
+          ]
+        ]
+      }
+    },
+    {
+      type: "Feature",
+      properties: { name: "Próxima Expansión", level: "expanding" },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [-1.008832438509387, 38.04554947737688],
+            [-1.002901321224499, 38.04217045796878],
+            [-0.999746466629631, 38.042468613292044],
+            [-0.9955399772046292, 38.044787552526714],
+            [-0.9946145307171435, 38.04694079485972],
+            [-0.9924691531875567, 38.048133345571074],
+            [-0.9951613135075377, 38.050518381113335],
+            [-0.9984003406665636, 38.050816496697394],
+            [-1.0065188906598053, 38.049524598135434],
+            [-1.008832438509387, 38.04554947737688]
           ]
         ]
       }

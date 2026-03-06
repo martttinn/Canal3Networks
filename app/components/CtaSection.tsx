@@ -11,7 +11,6 @@ const CtaSection = () => {
     <section className="py-16 md:py-24 relative overflow-hidden h-[500px] md:h-[600px] flex items-center">
       <div className="absolute inset-0 z-0">
         <HorizontalFlowStreaks />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080510] via-transparent to-[#080510] z-10 pointer-events-none"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">

@@ -44,7 +44,10 @@ const TestimonialMarquee = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-[#080510] border-t border-white/5 relative overflow-hidden">
+    <section className="py-16 md:py-24 relative">
+      {/* Background glow effects */}
+      <div className="absolute -top-[200px] -left-[100px] w-[600px] h-[600px] bg-[#85EDAF] rounded-full mix-blend-screen filter blur-[150px] opacity-5 pointer-events-none"></div>
+      <div className="absolute -bottom-[200px] -right-[100px] w-[500px] h-[500px] bg-[#6F70DE] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.08] pointer-events-none"></div>
       <div className="container mx-auto px-6 relative z-10 mb-16 text-center">
         <Reveal>
           <h2 className="text-4xl md:text-6xl font-bold mb-6 brand-font text-white tracking-tight">
@@ -55,7 +58,7 @@ const TestimonialMarquee = () => {
       </div>
 
       {/* Infinite Scroll Container */}
-      <div className="relative w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden" style={{ perspective: '1200px', perspectiveOrigin: '50% 50%' }}>
         {/* Gradient Masks (hide on mobile for full swipe edge) */}
         <div className="absolute top-0 left-0 h-full w-12 md:w-24 bg-gradient-to-r from-[#080510] to-transparent z-20 pointer-events-none hidden md:block"></div>
         <div className="absolute top-0 right-0 h-full w-12 md:w-24 bg-gradient-to-l from-[#080510] to-transparent z-20 pointer-events-none hidden md:block"></div>
@@ -64,6 +67,7 @@ const TestimonialMarquee = () => {
           ref={scrollContainerRef}
           onScroll={handleScroll}
           className="flex animate-scroll hover:pause-animation w-full md:w-max gap-4 md:gap-6 px-4 md:px-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar"
+          style={{ transform: 'rotateX(2deg)', transformStyle: 'preserve-3d' }}
         >
           {[...reviews, ...reviews, ...reviews].map((review, i) => (
             <div

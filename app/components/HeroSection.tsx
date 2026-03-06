@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Router, ChevronDown } from 'lucide-react';
 import Reveal from '@/app/components/Reveal';
 import { heroOffers } from '@/app/data/hero-offers';
@@ -98,26 +99,35 @@ const HeroSection = () => {
                 Oferta Destacada
               </div>
 
-              <div key={currentOfferIndex} className="animate-fade-in flex flex-col items-center w-full flex-1 justify-center">
-                <div className="relative mb-6">
-                  <div className={`absolute inset-0 rounded-full ${heroOffers[currentOfferIndex].accent} opacity-30 blur-xl`}></div>
-                  <div className={`relative w-20 h-20 rounded-2xl flex items-center justify-center ${heroOffers[currentOfferIndex].color} bg-white/5 border border-white/10 backdrop-blur-md`}>
-                    {heroOffers[currentOfferIndex].icon}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentOfferIndex}
+                  initial={{ opacity: 0, y: 15, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -15, scale: 0.97 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col items-center w-full flex-1 justify-center"
+                >
+                  <div className="relative mb-6">
+                    <div className={`absolute inset-0 rounded-full ${heroOffers[currentOfferIndex].accent} opacity-30 blur-xl`}></div>
+                    <div className={`relative w-20 h-20 rounded-2xl flex items-center justify-center ${heroOffers[currentOfferIndex].color} bg-white/5 border border-white/10 backdrop-blur-md`}>
+                      {heroOffers[currentOfferIndex].icon}
+                    </div>
                   </div>
-                </div>
 
-                <h3 className={`text-lg font-medium ${heroOffers[currentOfferIndex].color} mb-1`}>
-                  {heroOffers[currentOfferIndex].title}
-                </h3>
-                <div className="flex items-baseline justify-center gap-1 mb-4 text-white">
-                  <span className="text-6xl font-bold tracking-tighter brand-font">{heroOffers[currentOfferIndex].subtitle}</span>
-                  <span className="text-lg text-gray-400 font-medium">{heroOffers[currentOfferIndex].period}</span>
-                </div>
+                  <h3 className={`text-lg font-medium ${heroOffers[currentOfferIndex].color} mb-1`}>
+                    {heroOffers[currentOfferIndex].title}
+                  </h3>
+                  <div className="flex items-baseline justify-center gap-1 mb-4 text-white">
+                    <span className="text-6xl font-bold tracking-tighter brand-font">{heroOffers[currentOfferIndex].subtitle}</span>
+                    <span className="text-lg text-gray-400 font-medium">{heroOffers[currentOfferIndex].period}</span>
+                  </div>
 
-                <p className="text-gray-300 text-sm leading-relaxed max-w-[240px] mx-auto">
-                  {heroOffers[currentOfferIndex].desc}
-                </p>
-              </div>
+                  <p className="text-gray-300 text-sm leading-relaxed max-w-[240px] mx-auto">
+                    {heroOffers[currentOfferIndex].desc}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
 
               <div className="w-full mt-6 relative z-20">
                 <button className={`w-full py-4 rounded-2xl font-bold text-sm uppercase tracking-wide transition-all shadow-lg text-white cursor-pointer ${heroOffers[currentOfferIndex].accent} hover:opacity-90 active:scale-95 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]`}>

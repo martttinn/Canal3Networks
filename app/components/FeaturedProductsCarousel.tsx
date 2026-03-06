@@ -45,7 +45,10 @@ const FeaturedProductsCarousel = () => {
   };
 
   return (
-    <section className="py-24 bg-[#080510] relative overflow-hidden border-t border-white/5">
+    <section className="py-24 relative">
+      {/* Background glow effects */}
+      <div className="absolute -top-[150px] right-[10%] w-[600px] h-[600px] bg-[#78D4EF] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.06] pointer-events-none"></div>
+      <div className="absolute bottom-[10%] -left-[100px] w-[500px] h-[500px] bg-[#6F70DE] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.08] pointer-events-none"></div>
       <div className="container mx-auto px-6 mb-8 md:mb-12">
         <Reveal>
           <div className="text-center">
@@ -66,14 +69,11 @@ const FeaturedProductsCarousel = () => {
           <div key={product.id} className="snap-center shrink-0">
             <Reveal delay={i * 100}>
               <div
-                className={`relative w-[320px] h-[500px] bg-[#121217] rounded-[2rem] overflow-hidden border border-white/5 flex flex-col transition-all duration-300 group hover:border-white/30 hover:shadow-2xl hover:shadow-black/50 hover:-translate-y-2`}
+                className={`relative w-[320px] h-[500px] bg-[#0d0915] rounded-[2.5rem] overflow-hidden border border-white/5 flex flex-col transition-all duration-500 group hover:border-white/30 hover:-translate-y-2`}
                 style={{
                   '--accent': product.accentColor,
                 } as React.CSSProperties}
               >
-                {/* Hover Glow Effect */}
-                <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none z-0" style={{ backgroundColor: product.accentColor }}></div>
-
                 {/* Image Section - Full Bleed */}
                 <div className="relative h-[55%] w-full overflow-hidden z-10">
                   <div className="absolute top-4 left-4 z-20">
@@ -100,12 +100,10 @@ const FeaturedProductsCarousel = () => {
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
 
-                  {/* Gradient overlay for text readability with mask fix */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#121217] via-transparent to-transparent opacity-100"></div>
                 </div>
 
                 {/* Content */}
-                <div className="relative h-[45%] p-6 flex flex-col justify-between bg-[#121217] z-10">
+                <div className="relative h-[45%] p-6 flex flex-col justify-between bg-[#0d0915] z-10">
                   <div>
                     <div className="flex justify-between items-start mb-2">
                       <div>
@@ -117,7 +115,7 @@ const FeaturedProductsCarousel = () => {
                     {/* Specs as Pills */}
                     <div className="flex flex-wrap gap-2 mt-3">
                       {product.features.map((feat, idx) => (
-                        <span key={idx} className="text-[10px] font-medium text-gray-300 bg-white/5 px-2.5 py-1 rounded-md border border-white/5">
+                        <span key={idx} className="text-[10px] font-medium text-gray-300 bg-white/5 px-2.5 py-1 rounded-md border border-white/10 group-hover:bg-white/10 group-hover:border-white/30 group-hover:text-white transition-colors">
                           {feat}
                         </span>
                       ))}
@@ -133,14 +131,14 @@ const FeaturedProductsCarousel = () => {
                           {product.price}
                         </div>
                         {product.oldPrice && (
-                          <div className="text-sm font-medium text-gray-500 line-through">
+                          <div className="text-sm font-medium text-gray-600 line-through">
                             {product.oldPrice}
                           </div>
                         )}
                       </div>
                     </div>
                     <button
-                      className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white transition-all duration-300 group-hover:bg-white group-hover:text-black group-hover:border-white cursor-pointer"
+                      className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center bg-white/5 backdrop-blur-md text-white transition-all duration-300 group-hover:bg-white group-hover:border-white group-hover:text-black cursor-pointer"
                     >
                       <ChevronRight size={20} />
                     </button>

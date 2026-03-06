@@ -6,6 +6,7 @@ import PricingSection from '@/app/components/PricingSection';
 import StatsSection from '@/app/components/StatsSection';
 import FeaturedProductsCarousel from '@/app/components/FeaturedProductsCarousel';
 import WhyUsSection from '@/app/components/WhyUsSection';
+import OnboardingSection from '@/app/components/OnboardingSection';
 import TestimonialMarquee from '@/app/components/TestimonialMarquee';
 import CoverageMapSection from '@/app/components/CoverageMapSection';
 import FaqSection from '@/app/components/FaqSection';
@@ -21,6 +22,7 @@ export default function Page() {
       <StatsSection />
       <FeaturedProductsCarousel />
       <WhyUsSection />
+      <OnboardingSection />
       <TestimonialMarquee />
       <CoverageMapSection />
       <FaqSection />

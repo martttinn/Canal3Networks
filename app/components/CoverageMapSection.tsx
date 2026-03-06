@@ -66,7 +66,10 @@ const CoverageMapSection = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-[#080510] relative border-t border-white/5">
+    <section className="py-16 md:py-24 relative">
+      {/* Background glow effects */}
+      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-[#6F70DE] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.07] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-[#F59E0B] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.04] pointer-events-none"></div>
       <div className="container mx-auto px-6">
         <Reveal>
           <div className="text-center mb-16">
@@ -81,8 +84,8 @@ const CoverageMapSection = () => {
           <div className="lg:col-span-4 flex flex-col gap-4">
             <Reveal delay={100}>
               {/* Legend */}
-              <div className="glass-card rounded-2xl p-5 mb-4">
-                <h4 className="text-white font-bold text-sm mb-3 uppercase tracking-wider">Leyenda</h4>
+              <div className="bg-[#0d0915] rounded-[2rem] border border-white/5 p-6 mb-4 shadow-lg overflow-hidden relative">
+                <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wider relative z-10">Leyenda</h4>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-3">
                     <div className="w-4 h-4 rounded-sm bg-[#6F70DE]/30 border border-[#6F70DE]/60 border-dashed"></div>
@@ -112,17 +115,20 @@ const CoverageMapSection = () => {
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleFlyTo(store); }}
-                  className={`w-full text-left glass-card rounded-2xl p-5 transition-all duration-300 group hover:border-[#6F70DE]/40 hover:bg-white/5 cursor-pointer ${
-                    activeStore?.id === store.id ? 'border-[#6F70DE]/50 bg-[#6F70DE]/5' : ''
+                  className={`w-full text-left bg-[#0d0915] rounded-[2rem] border border-white/5 p-6 transition-all duration-500 group cursor-pointer relative overflow-hidden shadow-lg ${
+                    activeStore?.id === store.id ? 'border-[#6F70DE]/40 shadow-xl shadow-[#6F70DE]/10' : 'hover:border-[#6F70DE]/30'
                   }`}
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
-                    <h4 className="text-white font-bold text-sm flex items-center gap-2">
-                      <StoreIcon size={16} className="text-[#6F70DE]" />
+                  <div className={`absolute inset-0 bg-gradient-to-r from-[#6F70DE]/10 via-transparent to-transparent transition-opacity duration-500 ${activeStore?.id === store.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'}`}></div>
+                  <div className="relative z-10 flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5">
+                    <h4 className="text-white font-bold text-base flex items-center gap-3">
+                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center border transition-colors ${activeStore?.id === store.id ? 'bg-[#6F70DE]/20 border-[#6F70DE]/40 text-[#6F70DE]' : 'bg-white/5 border-white/10 text-gray-400 group-hover:bg-[#6F70DE]/10 group-hover:border-[#6F70DE]/30 group-hover:text-[#6F70DE]'}`}>
+                        <StoreIcon size={14} />
+                      </div>
                       {store.name}
                     </h4>
                     <a 
-                      href={`https://www.google.com/maps/dir/?api=1&destination=${store.lat},${store.lng}`}
+                      href={store.directionsUrl || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(store.name + ", " + store.address)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
@@ -131,7 +137,7 @@ const CoverageMapSection = () => {
                       Cómo llegar
                     </a>
                   </div>
-                  <div className="flex flex-col gap-2 text-xs text-gray-400">
+                  <div className="relative z-10 flex flex-col gap-3 text-[13px] text-gray-400">
                     <div className="flex items-center gap-2">
                       <MapPin size={12} className="text-[#6F70DE] shrink-0" />
                       <span>{store.address}</span>
@@ -151,8 +157,10 @@ const CoverageMapSection = () => {
           </div>
 
           {/* Map */}
-          <Reveal className="lg:col-span-8" delay={200}>
-            <div className="rounded-3xl overflow-hidden shadow-2xl shadow-[#6F70DE]/5 border border-white/10 h-[400px] sm:h-[500px] lg:h-[600px] relative group/map">
+          <Reveal className="lg:col-span-8 h-full" delay={200}>
+            <div className="bg-[#0d0915] rounded-[2.5rem] border border-white/5 shadow-2xl p-2 relative group/map overflow-hidden h-[450px] sm:h-[600px] lg:h-[650px] xl:h-[700px] flex flex-col transition-all duration-500 hover:border-white/10">
+              <div className="absolute inset-0 bg-gradient-to-bl from-[#78D4EF]/5 via-transparent to-transparent opacity-50 pointer-events-none"></div>
+              <div className="rounded-[2rem] overflow-hidden w-full flex-grow relative z-10">
               <CoverageMapInteractive
                 mapRef={mapRef}
                 activeStore={activeStore}
@@ -162,6 +170,7 @@ const CoverageMapSection = () => {
                 setIsSatellite={setIsSatellite}
                 handleFlyTo={handleFlyTo}
               />
+              </div>
             </div>
           </Reveal>
         </div>
