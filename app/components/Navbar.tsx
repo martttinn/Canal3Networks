@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { navLinks, servicesDropdown, productsDropdown } from '@/app/data/navigation';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
@@ -13,6 +14,17 @@ const Navbar = ({ showNav }: NavbarProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -145,120 +157,175 @@ const Navbar = ({ showNav }: NavbarProps) => {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div 
-        className={`fixed inset-0 bg-[#080510]/95 backdrop-blur-3xl transition-all duration-300 md:hidden flex flex-col items-center justify-center z-40 ${
-          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="flex flex-col gap-6 text-xl font-medium w-full max-w-xs px-4">
-          {navLinks.map((item) => (
-            item === "Servicios" ? (
-              <div key={item} className="flex flex-col">
-                <button 
-                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                  className="text-gray-300 hover:text-white transition-colors flex items-center justify-between w-full py-2"
-                >
-                  <span>{item}</span>
-                  <ChevronDown size={20} className={`transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180 text-[#6F70DE]' : ''}`} />
-                </button>
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-6 pl-2 border-l-2 border-white/10 ml-2 ${mobileServicesOpen ? 'max-h-[800px] mt-4 mb-4' : 'max-h-0'}`}>
-                  {servicesDropdown.map((section, idx) => (
-                    <div key={idx} className="flex flex-col gap-3">
-                      <div className="flex items-center gap-3">
-                        <section.icon size={20} className={section.color.replace('text-', 'text-').replace(/\[(.*?)\]/, '[$1]')} />
-                        <h4 className="text-white font-bold text-base">{section.category}</h4>
-                      </div>
-                      <div className="flex flex-col gap-1 pl-8">
-                        {section.links.map((link, linkIdx) => (
-                          <a 
-                            key={linkIdx}
-                            href={link.href}
-                            onClick={() => {
-                              setIsMobileMenuOpen(false);
-                              setMobileServicesOpen(false);
-                            }}
-                            className="text-gray-400 hover:text-white transition-colors py-2 text-sm flex items-center gap-2 group/mobilelink"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-white/20 group-hover/mobilelink:bg-white/60 transition-colors"></span>
-                            {link.name}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : item === "Productos" ? (
-              <div key={item} className="flex flex-col">
-                <button 
-                  onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-                  className="text-gray-300 hover:text-white transition-colors flex items-center justify-between w-full py-2"
-                >
-                  <span>{item}</span>
-                  <ChevronDown size={20} className={`transition-transform duration-300 ${mobileProductsOpen ? 'rotate-180 text-[#85EDAF]' : ''}`} />
-                </button>
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-6 pl-2 border-l-2 border-white/10 ml-2 ${mobileProductsOpen ? 'max-h-[800px] mt-4 mb-4' : 'max-h-0'}`}>
-                  {productsDropdown.map((section, idx) => (
-                    <div key={idx} className="flex flex-col gap-3">
-                      <div className="flex items-center gap-3">
-                        <section.icon size={20} className={section.color.replace('text-', 'text-').replace(/\[(.*?)\]/, '[$1]')} />
-                        <h4 className="text-white font-bold text-base">{section.category}</h4>
-                      </div>
-                      <div className="flex flex-col gap-1 pl-8">
-                        {section.links.map((link, linkIdx) => (
-                          <a 
-                            key={linkIdx}
-                            href={link.href}
-                            onClick={() => {
-                              setIsMobileMenuOpen(false);
-                              setMobileProductsOpen(false);
-                            }}
-                            className="text-gray-400 hover:text-white transition-colors py-2 text-sm flex items-center gap-2 group/mobilelink"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-white/20 group-hover/mobilelink:bg-white/60 transition-colors"></span>
-                            {link.name}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            key="mobile-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-[#080510]/95 backdrop-blur-3xl md:hidden flex flex-col items-center justify-start pt-32 pb-12 overflow-y-auto z-40"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+              className="flex flex-col gap-6 text-xl font-medium w-full max-w-xs px-4"
+            >
+              {navLinks.map((item) => (
+                item === "Servicios" ? (
+                  <div key={item} className="flex flex-col">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      className="text-gray-300 hover:text-white transition-colors flex items-center justify-between w-full py-2"
+                    >
+                      <span>{item}</span>
+                      <motion.span
+                        animate={{ rotate: mobileServicesOpen ? 180 : 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className={`flex items-center justify-center ${mobileServicesOpen ? 'text-[#6F70DE]' : ''}`}
+                      >
+                        <ChevronDown size={20} />
+                      </motion.span>
+                    </button>
+                    <AnimatePresence initial={false}>
+                      {mobileServicesOpen && (
+                        <motion.div
+                          key="services-content"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="flex flex-col gap-6 pl-2 border-l-2 border-white/10 ml-2 mt-4 mb-4">
+                            {servicesDropdown.map((section, idx) => (
+                              <div key={idx} className="flex flex-col gap-3">
+                                <div className="flex items-center gap-3">
+                                  <section.icon size={20} className={section.color.replace('text-', 'text-').replace(/\[(.*?)\]/, '[$1]')} />
+                                  <h4 className="text-white font-bold text-base">{section.category}</h4>
+                                </div>
+                                <div className="flex flex-col gap-1 pl-8">
+                                  {section.links.map((link, linkIdx) => (
+                                    <a 
+                                      key={linkIdx}
+                                      href={link.href}
+                                      onClick={() => {
+                                        setIsMobileMenuOpen(false);
+                                        setMobileServicesOpen(false);
+                                      }}
+                                      className="text-gray-400 hover:text-white transition-colors py-2 text-sm flex items-center gap-2 group/mobilelink"
+                                    >
+                                      <span className="w-1 h-1 rounded-full bg-white/20 group-hover/mobilelink:bg-white/60 transition-colors"></span>
+                                      {link.name}
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : item === "Productos" ? (
+                  <div key={item} className="flex flex-col">
+                    <button 
+                      onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                      className="text-gray-300 hover:text-white transition-colors flex items-center justify-between w-full py-2"
+                    >
+                      <span>{item}</span>
+                      <motion.span
+                        animate={{ rotate: mobileProductsOpen ? 180 : 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className={`flex items-center justify-center ${mobileProductsOpen ? 'text-[#85EDAF]' : ''}`}
+                      >
+                        <ChevronDown size={20} />
+                      </motion.span>
+                    </button>
+                    <AnimatePresence initial={false}>
+                      {mobileProductsOpen && (
+                        <motion.div
+                          key="products-content"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="flex flex-col gap-6 pl-2 border-l-2 border-white/10 ml-2 mt-4 mb-4">
+                            {productsDropdown.map((section, idx) => (
+                              <div key={idx} className="flex flex-col gap-3">
+                                <div className="flex items-center gap-3">
+                                  <section.icon size={20} className={section.color.replace('text-', 'text-').replace(/\[(.*?)\]/, '[$1]')} />
+                                  <h4 className="text-white font-bold text-base">{section.category}</h4>
+                                </div>
+                                <div className="flex flex-col gap-1 pl-8">
+                                  {section.links.map((link, linkIdx) => (
+                                    <a 
+                                      key={linkIdx}
+                                      href={link.href}
+                                      onClick={() => {
+                                        setIsMobileMenuOpen(false);
+                                        setMobileProductsOpen(false);
+                                      }}
+                                      className="text-gray-400 hover:text-white transition-colors py-2 text-sm flex items-center gap-2 group/mobilelink"
+                                    >
+                                      <span className="w-1 h-1 rounded-full bg-white/20 group-hover/mobilelink:bg-white/60 transition-colors"></span>
+                                      {link.name}
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <a 
+                    key={item} 
+                    href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setMobileServicesOpen(false);
+                    }}
+                    className="text-gray-300 hover:text-white transition-colors py-2"
+                  >
+                    {item}
+                  </a>
+                )
+              ))}
               <a 
-                key={item} 
-                href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                href="#cliente"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setMobileServicesOpen(false);
                 }}
-                className="text-gray-300 hover:text-white transition-colors py-2"
+                className="text-gray-300 hover:text-white transition-colors py-2 border-t border-white/10 mt-2"
               >
-                {item}
+                Soy Cliente
               </a>
-            )
-          ))}
-          <a 
-            href="#cliente"
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              setMobileServicesOpen(false);
-            }}
-            className="text-gray-300 hover:text-white transition-colors py-2 border-t border-white/10 mt-2"
-          >
-            Soy Cliente
-          </a>
-        </div>
-        <button 
-          className="mt-8 bg-gradient-to-r from-[#6F70DE] to-[#85EDAF] text-black w-full max-w-xs px-8 py-3.5 rounded-full text-lg font-bold shadow-lg shadow-[#6F70DE]/20 active:scale-95 transition-transform cursor-pointer"
-          onClick={() => {
-            setIsMobileMenuOpen(false);
-            setMobileServicesOpen(false);
-          }}
-        >
-          Contratar Ahora
-        </button>
-      </div>
+            </motion.div>
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="mt-8 bg-gradient-to-r from-[#6F70DE] to-[#85EDAF] text-black w-full max-w-xs px-8 py-3.5 rounded-full text-lg font-bold shadow-lg shadow-[#6F70DE]/20 active:scale-95 transition-transform cursor-pointer"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setMobileServicesOpen(false);
+              }}
+            >
+              Contratar Ahora
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

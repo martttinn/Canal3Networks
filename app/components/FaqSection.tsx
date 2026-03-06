@@ -55,7 +55,7 @@ const FaqSection = () => {
     <section className="py-16 md:py-24 relative">
       {/* Background glow effects */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#6F70DE] rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#85EDAF] rounded-full mix-blend-screen filter blur-[150px] opacity-5 pointer-events-none"></div>
+      <div className="absolute bottom-24 left-0 w-[500px] h-[500px] bg-[#85EDAF] rounded-full mix-blend-screen filter blur-[150px] opacity-5 pointer-events-none"></div>
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#6F70DE]/5 blur-[120px] rounded-full pointer-events-none" />
       

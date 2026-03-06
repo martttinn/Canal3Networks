@@ -7,8 +7,9 @@ const Footer = () => {
   return (
     <footer className="pt-20 pb-10 text-gray-400 text-sm relative overflow-hidden">
       {/* Decorative Background Glows */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#6F70DE]/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2"></div>
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#85EDAF]/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2"></div>
+      <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-[#080510] via-[#080510]/80 to-transparent pointer-events-none z-0"></div>
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-[#6F70DE]/5 rounded-full blur-[120px] pointer-events-none translate-y-1/3 z-0"></div>
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#85EDAF]/5 rounded-full blur-[120px] pointer-events-none translate-y-1/3 z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">

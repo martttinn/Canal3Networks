@@ -8,9 +8,13 @@ const HorizontalFlowStreaks = dynamic(() => import('@/app/components/HorizontalF
 
 const CtaSection = () => {
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden h-[500px] md:h-[600px] flex items-center">
+    <section className="py-16 md:py-24 relative overflow-hidden h-[600px] md:h-[600px] flex items-center">
       <div className="absolute inset-0 z-0">
         <HorizontalFlowStreaks />
+        {/* Top edge fade masking */}
+        <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-[#080510] via-[#080510]/80 to-transparent pointer-events-none"></div>
+        {/* Bottom edge fade masking */}
+        <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#080510] via-[#080510]/80 to-transparent pointer-events-none"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">
@@ -18,7 +22,7 @@ const CtaSection = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 brand-font text-white drop-shadow-xl">
             ¿A que esperas?
           </h2>
-          <p className="text-gray-300 mb-8 sm:mb-10 max-w-xl mx-auto text-base sm:text-lg drop-shadow-md">
+          <p className="text-gray-300 mb-8 sm:mb-10 max-w-xl mx-auto text-base sm:text-lg drop-shadow-md font-medium">
             Sin contestadores automáticos. Escríbenos por WhatsApp y un técnico te recomendará la mejor tarifa para tu casa.
           </p>
 
