@@ -30,6 +30,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Canal3 Networks",
   description: "Tu operador de confianza. Fibra, móvil, empresas y mucho más.",
+  icons: {
+    icon: "/logo/canal3_logo_simple_trans.png",
+    apple: "/logo/canal3_logo_simple_trans.png",
+  },
 };
 
 export default function RootLayout({
