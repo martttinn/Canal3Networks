@@ -1,4 +1,4 @@
-import { Wifi, Smartphone, Layers, Tv, Headphones } from 'lucide-react';
+import { Wifi, Smartphone, Layers, Tablet, Headphones } from 'lucide-react';
 
 export const navLinks = ["Servicios", "Productos", "Promociones", "Sobre Nosotros"] as const;
 
@@ -9,10 +9,10 @@ export const servicesDropdown = [
     color: "text-[#6F70DE]",
     bg: "bg-[#6F70DE]/10",
     links: [
-      { name: "Fibra Óptica 300Mb", href: "#tarifas-simples" },
-      { name: "Fibra Óptica 600Mb", href: "#tarifas-simples" },
-      { name: "Fibra Óptica 1Gbps", href: "#tarifas-simples" },
-      { name: "Conexión WIMAX", href: "#tarifas-simples" },
+      { name: "Fibra 300Mbs", href: "#tarifas-simples" },
+      { name: "Fibra 600Mbs", href: "#tarifas-simples" },
+      { name: "Fibra 1Gbps", href: "#tarifas-simples" },
+      { name: "Conexion Por Antena", href: "#tarifas-simples" },
     ]
   },
   {
@@ -21,22 +21,25 @@ export const servicesDropdown = [
     color: "text-[#78D4EF]",
     bg: "bg-[#78D4EF]/10",
     links: [
-      { name: "Tarifa 50GB + Ilimitadas", href: "#tarifas-simples" },
-      { name: "Tarifa 100GB + Ilimitadas", href: "#tarifas-simples" },
-      { name: "Tarifa Ilimitada 5G", href: "#tarifas-simples" },
-      { name: "Líneas Adicionales", href: "#tarifas-simples" },
+      { name: "50GB", href: "#tarifas-simples" },
+      { name: "120GB", href: "#tarifas-simples" },
+      { name: "150GB compartidos", href: "#tarifas-simples" },
+      { name: "250GB compartidos", href: "#tarifas-simples" },
+      { name: "Datos Ilimitados", href: "#tarifas-simples" },
     ]
   },
   {
-    category: "Packs Convergentes",
+    category: "Fibra + Móvil",
     icon: Layers,
     color: "text-[#85EDAF]",
     bg: "bg-[#85EDAF]/10",
     links: [
-      { name: "Fibra 300Mb + Móvil 50GB", href: "#tarifas-simples" },
-      { name: "Fibra 600Mb + Móvil 100GB", href: "#tarifas-simples" },
-      { name: "Fibra 1Gbps + 2 Líneas 5G", href: "#tarifas-simples" },
-      { name: "Configura tu Paquete", href: "#tarifas-simples" },
+      { name: "Fibra 300Mbs + Móvil 50GB", href: "#tarifas-simples" },
+      { name: "Fibra 600Mbs + Móvil 50GB", href: "#tarifas-simples" },
+      { name: "Fibra 1Gbps + Móvil 120GB", href: "#tarifas-simples" },
+      { name: "Fibra 1Gbps + Móvil 150GB compartidos", href: "#tarifas-simples" },
+      { name: "Fibra 1Gbps + Móvil 250GB compartidos", href: "#tarifas-simples" },
+      { name: "Fibra 1Gbps + Móvil Ilimitados", href: "#tarifas-simples" },
     ]
   }
 ];
@@ -48,34 +51,39 @@ export const productsDropdown = [
     color: "text-[#6F70DE]",
     bg: "bg-[#6F70DE]/10",
     links: [
-      { name: "iPhone 15 Pro", href: "#iphone-15" },
-      { name: "Samsung Galaxy S24", href: "#galaxy-s24" },
-      { name: "Xiaomi 14", href: "#xiaomi-14" },
-      { name: "Ofertas Reacondicionados", href: "#reacondicionados" },
+      { name: "Apple", href: "#iphone-15" },
+      { name: "Samsung", href: "#iphone-15" },
+      { name: "Xiaomi", href: "#iphone-15" },
+      { name: "Honor", href: "#iphone-15" },
+      { name: "Oppo", href: "#iphone-15" },
+      { name: "Ver Todos", href: "#iphone-15" },
+
     ]
   },
   {
-    category: "Smart TVs",
-    icon: Tv,
+    category: "Tablets",
+    icon: Tablet,
     color: "text-[#85EDAF]",
     bg: "bg-[#85EDAF]/10",
     links: [
-      { name: "Televisores OLED", href: "#tv-oled" },
-      { name: "Televisores QLED", href: "#tv-qled" },
-      { name: "Accesorios TV", href: "#tv-accesorios" },
-      { name: "Barras de Sonido", href: "#soundbars" },
+      { name: "Apple iPad", href: "#ipad-air" },
+      { name: "Samsung Galaxy Tab", href: "#ipad-air" },
+      { name: "Lenovo Tab", href: "#ipad-air" },
+      { name: "Huawei MatePad", href: "#ipad-air" },
+      { name: "Xiaomi Pad", href: "#ipad-air" },
+      { name: "Ver Todos", href: "#ipad-air" },
     ]
   },
   {
-    category: "Accesorios Móviles",
+    category: "Accesorios",
     icon: Headphones,
     color: "text-[#78D4EF]",
     bg: "bg-[#78D4EF]/10",
     links: [
-      { name: "Auriculares Inalámbricos", href: "#auriculares" },
-      { name: "Fundas y Cargadores", href: "#fundas" },
-      { name: "Smartwatches", href: "#smartwatches" },
-      { name: "Promociones", href: "#promociones-accesorios" },
+      { name: "Fundas y Protectores", href: "#auriculares" },
+      { name: "Cargadores y Cables", href: "#fundas" },
+      { name: "Auriculares", href: "#smartwatches" },
+      { name: "Ver Todos", href: "#promociones-accesorios" },
     ]
   }
 ];

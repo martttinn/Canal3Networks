@@ -74,7 +74,7 @@ const CoverageMapSection = () => {
         <Reveal>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 brand-font text-white tracking-tight">
-              Nuestra <span className="text-[#6F70DE]">Cobertura</span>
+              Nuestra <span className="text-[#6F70DE]">Fibra</span>
             </h2>
           </div>
         </Reveal>

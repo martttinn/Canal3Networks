@@ -82,13 +82,6 @@ const OnboardingSection = () => {
                            <div className="inline-flex items-center justify-center px-4 py-1.5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-widest transition-colors group-hover:bg-white/10 group-hover:border-white/20 group-hover:text-white">
                               Paso 0{index + 1}
                            </div>
-
-                           {/* Next Step Arrow (Hidden on last item) */}
-                           {index < steps.length - 1 && (
-                              <div className="hidden lg:flex w-8 h-8 rounded-full border border-white/5 bg-white/5 items-center justify-center text-white/20 group-hover:bg-white/10 group-hover:text-white/50 group-hover:translate-x-1 transition-all">
-                                <ChevronRight size={16} />
-                              </div>
-                           )}
                         </div>
 
                         {/* Icon Container matching WhyUs styles */}

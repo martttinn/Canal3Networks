@@ -61,14 +61,24 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center h-full lg:h-auto pt-20 lg:pt-0">
 
         <div className="lg:col-span-6 flex flex-col gap-6 text-center lg:text-left items-center lg:items-start justify-center h-full lg:h-auto">
-          <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight leading-none brand-font text-white drop-shadow-xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight leading-none brand-font text-white drop-shadow-xl"
+          >
             Velocidad y conectividad <br className="hidden sm:block" />
             <span className="animate-text-gradient">al mejor precio</span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-lg leading-relaxed drop-shadow-md">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+            className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-lg leading-relaxed drop-shadow-md"
+          >
             Disfruta ya de la <strong className="text-white font-bold">máxima velocidad y cobertura</strong> al mejor precio. Con <strong className="text-white font-bold">asistencia técnica y atención al cliente</strong> personalizadas.
-          </p>
+          </motion.p>
 
           <Reveal delay={600} className="w-full flex justify-center lg:justify-start">
             <div className="w-[90vw] sm:w-[90%] max-w-md mt-8 lg:mt-0">
